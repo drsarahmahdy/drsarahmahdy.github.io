@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="7KA6fO_ddJZs4lYfxa1pXguZC8Sh3retvYIr6DBIuFk" />
+<title>د. سارة مهدي | خبيرة تسويق وباحثة أكاديمية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+  :root{
+    --ink:#1E2A2E; --paper:#F1EEE4; --paper-deep:#E6E1D2;
+    --gold:#C68A2E; --clay:#B5583F; --line: rgba(30,42,46,0.15);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper); color:var(--ink); font-family:'Tajawal',sans-serif; line-height:1.7;}
+  h1,h2,h3,.brand{font-family:'Markazi Text', serif; font-weight:700;}
+  a{color:inherit;}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(241,238,228,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
+  nav{max-width:1080px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:16px 28px; position:relative;}
+  .brand{font-size:1.8rem; white-space:nowrap;} .brand span{color:var(--gold);}
+  nav ul{display:flex; gap:12px; list-style:none; flex-wrap:nowrap; align-items:center; overflow-x:auto;}
+  nav a{font-size:0.72rem; font-weight:500; opacity:0.8; white-space:nowrap;}
+  nav a:hover{opacity:1; color:var(--gold);}
+  #authStatus{font-size:0.8rem; font-weight:700;}
+  #loginBtn, #logoutBtn{cursor:pointer; border:1px solid var(--ink); background:transparent; padding:6px 14px; border-radius:2px; font-family:'Tajawal',sans-serif; font-size:0.82rem;}
+  #langToggle{cursor:pointer; border:1px solid var(--gold); background:var(--gold); color:var(--ink); padding:6px 14px; border-radius:2px; font-family:'Tajawal',sans-serif; font-size:0.82rem; font-weight:800;}
+
+  .hero{max-width:1080px; margin:0 auto; padding:70px 28px 50px; display:grid; grid-template-columns:1.2fr 0.8fr; gap:50px; align-items:center;}
+  .eyebrow{display:inline-flex; align-items:center; gap:10px; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; color:var(--clay); font-weight:700; margin-bottom:14px;}
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--clay);}
+  .welcome-line{font-size:1.15rem; color:var(--gold); font-weight:700; margin-bottom:16px;}
+  .hero h1{font-size:clamp(2.2rem,4.5vw,3.4rem); line-height:1.15; margin-bottom:18px;}
+  .hero h1 em{font-style:normal; color:var(--gold);}
+  .hero p.lead{font-size:1.08rem; max-width:48ch; opacity:0.85; margin-bottom:24px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{display:inline-block; padding:12px 24px; border-radius:2px; font-weight:700; font-size:0.9rem; text-decoration:none; border:none; cursor:pointer; font-family:'Tajawal',sans-serif; transition:.2s;}
+  .btn-solid{background:var(--ink); color:var(--paper);}
+  .btn-solid:hover{transform:translateY(-2px); box-shadow:0 8px 18px rgba(30,42,46,.25);}
+  .btn-outline{border:1.5px solid var(--ink); color:var(--ink); background:transparent;}
+  .btn-outline:hover{background:var(--ink); color:var(--paper);}
+  .btn-gold{background:var(--gold); color:var(--ink);}
+  .btn-small{padding:7px 14px; font-size:0.8rem;}
+  .btn-danger{background:transparent; color:var(--clay); border:1px solid var(--clay); padding:6px 12px; font-size:0.78rem;}
+
+  .canvas-card{background:var(--ink); color:var(--paper); border-radius:4px; padding:28px 26px; position:relative; box-shadow:0 25px 50px -20px rgba(30,42,46,.4);}
+  .canvas-badge{position:absolute; top:-13px; right:22px; background:var(--gold); color:var(--ink); font-size:.72rem; font-weight:800; padding:4px 12px; border-radius:2px;}
+  .canvas-row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px dashed rgba(241,238,228,.25); font-size:.9rem;}
+  .canvas-row:last-child{border-bottom:none;}
+  .canvas-row span:first-child{opacity:.55;} .canvas-row span:last-child{font-weight:700; color:var(--gold);}
+
+  section{max-width:1080px; margin:0 auto; padding:64px 28px;}
+  .section-head{margin-bottom:36px; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;}
+  .section-head h2{font-size:2rem;}
+
+  .card-list{display:grid; gap:14px;}
+  .item-card{background:var(--paper-deep); border-radius:4px; padding:20px 22px; position:relative;}
+  .item-card .date{font-size:.78rem; color:var(--clay); font-weight:700; letter-spacing:.5px;}
+  .item-card h3{font-size:1.1rem; margin:6px 0 6px;}
+  .item-card p{font-size:.92rem; opacity:.8;}
+  .item-card .meta{font-size:.82rem; opacity:.65; margin-top:6px;}
+  .item-card .row-actions{position:absolute; left:16px; top:16px;}
+  .empty-note{opacity:.55; font-size:.92rem; padding:20px 0;}
+
+  .add-box{background:#fff; border:1px solid var(--line); border-radius:4px; padding:22px; margin-top:22px;}
+  .add-box h4{font-size:1rem; margin-bottom:14px;}
+  .add-box input, .add-box textarea{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:3px;
+    font-family:'Tajawal',sans-serif; font-size:.92rem; margin-bottom:10px; background:var(--paper);
+  }
+  .add-box textarea{min-height:70px; resize:vertical;}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+
+  .cv-box{background:var(--paper-deep); border:1px solid var(--line); border-radius:4px; padding:26px;}
+  .cv-box textarea{width:100%; min-height:220px; border:1px solid var(--line); border-radius:3px; padding:14px; font-family:'Tajawal',sans-serif; font-size:.94rem; line-height:1.8; background:var(--paper);}
+  .cv-display{white-space:pre-wrap; font-size:.96rem; line-height:1.9;}
+  .toolbar{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;}
+
+  .contact-wrap{background:var(--ink); color:var(--paper); border-radius:6px; padding:54px 40px; display:grid; grid-template-columns:1fr 1fr; gap:36px;}
+  .contact-wrap h2{color:var(--paper);}
+  .contact-wrap .eyebrow{color:var(--gold);}
+  .contact-list{list-style:none; margin-top:20px;}
+  .contact-list li{padding:9px 0; border-bottom:1px solid rgba(241,238,228,.15); font-size:.95rem;}
+  .contact-list li b{display:block; font-size:.72rem; opacity:.55; text-transform:uppercase; letter-spacing:1px; margin-bottom:3px;}
+  form.contact-form{display:flex; flex-direction:column; gap:12px;}
+  form.contact-form input, form.contact-form textarea{background:transparent; border:none; border-bottom:1px solid rgba(241,238,228,.35); color:var(--paper); padding:9px 4px; font-family:'Tajawal',sans-serif;}
+  form.contact-form ::placeholder{color:rgba(241,238,228,.45);}
+  form.contact-form input:focus, form.contact-form textarea:focus{outline:none; border-color:var(--gold);}
+
+  footer{text-align:center; padding:30px 28px; opacity:.55; font-size:.85rem; border-top:1px solid var(--line);}
+  footer .signature{font-family:'Markazi Text',serif; font-size:1.6rem; font-weight:700; color:var(--gold); opacity:1; margin-bottom:6px;}
+  .status-msg{font-size:.85rem; color:var(--clay); margin-top:8px;}
+  .loading{opacity:.55; font-size:.9rem; padding:16px 0;}
+  .hidden{display:none !important;}
+
+  /* login modal */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(30,42,46,0.55); z-index:100;
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-box{
+    background:var(--paper); border-radius:6px; padding:36px; max-width:380px; width:100%;
+    box-shadow:0 30px 60px rgba(0,0,0,.3);
+  }
+  .modal-box h3{font-size:1.5rem; margin-bottom:6px;}
+  .modal-box p.hint{font-size:.85rem; opacity:.6; margin-bottom:18px;}
+  .modal-box input{width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:3px; margin-bottom:12px; font-family:'Tajawal',sans-serif;}
+  .modal-actions{display:flex; gap:10px; margin-top:6px;}
+  .modal-close{position:absolute; top:14px; left:14px; background:none; border:none; font-size:1.3rem; cursor:pointer; opacity:.5;}
+  .modal-box{position:relative;}
+
+  .hamburger{display:none; background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--ink); padding:4px 8px;}
+
+  @media (max-width:800px){
+    .brand{font-size:1.6rem;}
+    .hamburger{display:block;}
+    nav ul{
+      display:none; position:absolute; top:100%; right:0; left:0;
+      flex-direction:column; align-items:flex-start; background:var(--paper);
+      border-bottom:1px solid var(--line); padding:14px 22px; gap:14px;
+      box-shadow:0 12px 20px rgba(30,42,46,0.08);
+    }
+    nav ul.mobile-open{display:flex;}
+    nav a{font-size:0.95rem; white-space:normal;}
+    #langToggle{margin-top:4px;}
+    .hero{grid-template-columns:1fr; padding-top:50px;}
+    .contact-wrap{grid-template-columns:1fr; padding:34px 22px;}
+    .grid-2{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand" data-ar="د. سارة <span>مهدي</span>" data-en="Dr. Sarah <span>Mahdy</span>">د. سارة <span>مهدي</span></div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    <ul id="navList">
+      <li><a href="#about" data-ar="نبذة" data-en="About">نبذة</a></li>
+      <li><a href="#cv" data-ar="الاهتمامات البحثية" data-en="Research Interests">الاهتمامات البحثية</a></li>
+      <li><a href="#education" data-ar="المؤهلات العلمية" data-en="Education">المؤهلات العلمية</a></li>
+      <li><a href="#theses" data-ar="الرسائل العلمية" data-en="Theses">الرسائل العلمية</a></li>
+      <li><a href="#publications" data-ar="الأبحاث المنشورة" data-en="Publications">الأبحاث المنشورة</a></li>
+      <li><a href="#achievements" data-ar="الإنجازات" data-en="Achievements">الإنجازات</a></li>
+      <li><a href="#courses" data-ar="الدورات التدريبية" data-en="Courses">الدورات التدريبية</a></li>
+      <li><a href="#academic-links" data-ar="الهوية الرقمية الأكاديمية" data-en="Digital Scholarly Identity">الهوية الرقمية الأكاديمية</a></li>
+      <li><a href="#news" data-ar="آخر الأخبار" data-en="News">آخر الأخبار</a></li>
+      <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+      <li><button id="loginBtn" onclick="openLoginModal()" data-ar="تسجيل الدخول" data-en="Log In">تسجيل الدخول</button></li>
+      <li><button id="logoutBtn" onclick="doLogout()" class="hidden" data-ar="تسجيل الخروج" data-en="Log Out">تسجيل الخروج</button></li>
+      <li><button id="langToggle" onclick="toggleLang()">English</button></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLoginModal()">×</button>
+    <h3 data-ar="تسجيل الدخول" data-en="Log In">تسجيل الدخول</h3>
+    <p class="hint" data-ar="دخول خاص بمالكة الموقع فقط للتعديل" data-en="Owner-only login for editing">دخول خاص بمالكة الموقع فقط للتعديل</p>
+    <input id="loginEmail" type="email" data-ph-ar="البريد الإلكتروني" data-ph-en="Email" placeholder="البريد الإلكتروني">
+    <input id="loginPass" type="password" data-ph-ar="كلمة المرور" data-ph-en="Password" placeholder="كلمة المرور">
+    <div class="modal-actions">
+      <button class="btn btn-solid btn-small" onclick="doLogin()" data-ar="دخول" data-en="Log In">دخول</button>
+      <button class="btn btn-outline btn-small" onclick="closeLoginModal()" data-ar="إلغاء" data-en="Cancel">إلغاء</button>
+    </div>
+    <div id="loginStatus" class="status-msg"></div>
+  </div>
+</div>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow" data-ar="دكتوراه في إدارة الأعمال (تسويق) — بتقدير امتياز" data-en="PhD in Business Administration (Marketing) — Distinction">دكتوراه في إدارة الأعمال (تسويق) — بتقدير امتياز</div>
+    <p class="welcome-line" data-ar="مرحباً بك في صفحتي الأكاديمية 👋" data-en="Welcome to my academic page 👋">مرحباً بك في صفحتي الأكاديمية 👋</p>
+    <h1 data-ar="باحثة في &lt;em&gt;تسويق المؤثرين&lt;/em&gt; والتسويق الرقمي في عصر الذكاء الاصطناعي" data-en="Researcher in &lt;em&gt;Influencer Marketing&lt;/em&gt; and Digital Marketing in the AI Era">باحثة في <em>تسويق المؤثرين</em> والتسويق الرقمي في عصر الذكاء الاصطناعي</h1>
+    <p class="lead" data-ar="محاضرة وباحثة أكاديمية متخصصة في التسويق الرقمي، تسويق المؤثرين، والمؤثرين الافتراضيين. أسعى لإعداد جيل من الخريجين القادرين على مواجهة تحديات التسويق في عصر الرقمنة." data-en="Marketing lecturer and academic researcher specializing in Digital Marketing, Influencer Marketing, and Virtual Influencers. Committed to preparing graduates for the evolving challenges of marketing in the digital era.">محاضرة وباحثة أكاديمية متخصصة في التسويق الرقمي، تسويق المؤثرين، والمؤثرين الافتراضيين. أسعى لإعداد جيل من الخريجين القادرين على مواجهة تحديات التسويق في عصر الرقمنة.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-solid" data-ar="تواصل معي" data-en="Contact Me">تواصل معي</a>
+      <a href="#cv" class="btn btn-outline" data-ar="السيرة الذاتية" data-en="View CV">السيرة الذاتية</a>
+    </div>
+  </div>
+  <div class="canvas-card">
+    <span class="canvas-badge" data-ar="نبذة مختصرة" data-en="Brief Overview">نبذة مختصرة</span>
+    <div class="canvas-row"><span data-ar="التخصص" data-en="Specialization">التخصص</span><span data-ar="التسويق الرقمي وتسويق المؤثرين" data-en="Digital & Influencer Marketing">التسويق الرقمي وتسويق المؤثرين</span></div>
+    <div class="canvas-row"><span data-ar="الاهتمام البحثي" data-en="Research Interest">الاهتمام البحثي</span><span data-ar="تسويق المؤثرين والمؤثرين الافتراضيين" data-en="Influencer & Virtual Influencer Marketing">تسويق المؤثرين والمؤثرين الافتراضيين</span></div>
+    <div class="canvas-row"><span data-ar="المؤهل" data-en="Qualification">المؤهل</span><span data-ar="دكتوراه بتقدير امتياز، 2025" data-en="PhD with Distinction, 2025">دكتوراه بتقدير امتياز، 2025</span></div>
+    <div class="canvas-row"><span data-ar="الجهة" data-en="Institution">الجهة</span><span data-ar="الأكاديمية العربية للعلوم والتكنولوجيا" data-en="Arab Academy for Science & Technology">الأكاديمية العربية للعلوم والتكنولوجيا</span></div>
+    <div class="canvas-row"><span data-ar="متاحة لـ" data-en="Available for">متاحة لـ</span><span data-ar="محاضرات · بحث · استشارات" data-en="Lectures · Research · Consulting">محاضرات · بحث · استشارات</span></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head"><div><div class="eyebrow" data-ar="من أنا" data-en="Who I Am">من أنا</div><h2 data-ar="نبذة عني" data-en="About Me">نبذة عني</h2></div></div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px;" class="grid-2">
+    <p style="opacity:.85" data-ar="باحثة أكاديمية متخصصة في التسويق الرقمي وتسويق المؤثرين والمؤثرين الافتراضيين. حاصلة على درجة الدكتوراه في إدارة الأعمال تخصص تسويق بتقدير امتياز من الأكاديمية العربية للعلوم والتكنولوجيا والنقل البحري." data-en="Academic researcher specializing in Digital Marketing, Influencer Marketing, and Virtual Influencers. Holds a PhD in Business Administration (Marketing) with Distinction from the Arab Academy for Science, Technology & Maritime Transport.">باحثة أكاديمية متخصصة في التسويق الرقمي وتسويق المؤثرين والمؤثرين الافتراضيين. حاصلة على درجة الدكتوراه في إدارة الأعمال تخصص تسويق بتقدير امتياز من الأكاديمية العربية للعلوم والتكنولوجيا والنقل البحري.</p>
+    <p style="opacity:.85" data-ar="نشرت عدة أبحاث علمية محكّمة في مجلات معتمدة من المجلس الأعلى للجامعات، وحصلت على جائزة أفضل بحث علمي مرتين، إلى جانب جائزة أفضل تصميم لكتاب جامعي. أؤمن بأهمية نقل المعرفة والخبرة البحثية للأجيال القادمة." data-en="Author of multiple peer-reviewed papers in journals approved by Egypt's Supreme Council of Universities, and recipient of the Best Scientific Research Award (twice) and the Best University Textbook Design Award.">نشرت عدة أبحاث علمية محكّمة في مجلات معتمدة من المجلس الأعلى للجامعات، وحصلت على جائزة أفضل بحث علمي مرتين، إلى جانب جائزة أفضل تصميم لكتاب جامعي. أؤمن بأهمية نقل المعرفة والخبرة البحثية للأجيال القادمة.</p>
+  </div>
+</section>
+
+<!-- CV SECTION -->
+<section id="cv">
+  <div class="section-head">
+    <div><h2 data-ar="الاهتمامات البحثية" data-en="Research Interests">الاهتمامات البحثية</h2></div>
+    <button class="btn btn-gold btn-small owner-only hidden" onclick="toggleCvEdit()" id="cvEditBtn" data-ar="تعديل" data-en="Edit">تعديل</button>
+  </div>
+  <div class="cv-box">
+    <div id="cvDisplay" class="cv-display">جارٍ التحميل...</div>
+    <div id="cvEditArea" style="display:none;">
+      <textarea id="cvTextarea"></textarea>
+      <div class="toolbar">
+        <button class="btn btn-solid btn-small" onclick="saveCv()">حفظ</button>
+        <button class="btn btn-outline btn-small" onclick="toggleCvEdit()">إلغاء</button>
+      </div>
+    </div>
+    <div id="cvStatus" class="status-msg"></div>
+  </div>
+</section>
+
+<!-- EDUCATION SECTION -->
+<section id="education">
+  <div class="section-head"><div><div class="eyebrow" data-ar="المسار الأكاديمي" data-en="Academic Path">المسار الأكاديمي</div><h2 data-ar="المؤهلات العلمية" data-en="Education">المؤهلات العلمية</h2></div></div>
+  <div id="educationList" class="card-list"><div class="loading" data-ar="جارٍ تحميل المؤهلات..." data-en="Loading education...">جارٍ تحميل المؤهلات...</div></div>
+  <div class="add-box owner-only hidden">
+    <h4 data-ar="إضافة مؤهل علمي" data-en="Add Qualification">إضافة مؤهل علمي</h4>
+    <input id="eduDegree" data-ph-ar="الدرجة العلمية" data-ph-en="Degree" placeholder="الدرجة العلمية">
+    <div class="grid-2">
+      <input id="eduInstitution" data-ph-ar="الجهة المانحة" data-ph-en="Institution" placeholder="الجهة المانحة">
+      <input id="eduYear" data-ph-ar="السنة" data-ph-en="Year" placeholder="السنة">
+    </div>
+    <button class="btn btn-solid btn-small" onclick="addEducation()" data-ar="إضافة المؤهل" data-en="Add Qualification">إضافة المؤهل</button>
+    <div id="eduStatus" class="status-msg"></div>
+  </div>
+</section>
+
+<!-- THESES SECTION -->
+<section id="theses">
+  <div class="section-head"><div><div class="eyebrow" data-ar="البحث الأكاديمي" data-en="Academic Research">البحث الأكاديمي</div><h2 data-ar="الرسائل العلمية" data-en="Research Theses">الرسائل العلمية</h2></div></div>
+  <div id="thesisList" class="card-list"><div class="loading" data-ar="جارٍ تحميل الرسائل..." data-en="Loading theses...">جارٍ تحميل الرسائل...</div></div>
+  <div class="add-box owner-only hidden">
+    <h4 data-ar="إضافة رسالة علمية" data-en="Add Thesis">إضافة رسالة علمية</h4>
+    <input id="thesisTitle" data-ph-ar="عنوان الرسالة" data-ph-en="Thesis title" placeholder="عنوان الرسالة">
+    <div class="grid-2">
+      <input id="thesisDegree" data-ph-ar="الدرجة والتقدير (مثال: رسالة الدكتوراه — بتقدير امتياز)" data-ph-en="Degree & honors" placeholder="الدرجة والتقدير (مثال: رسالة الدكتوراه — بتقدير امتياز)">
+      <input id="thesisYear" data-ph-ar="السنة" data-ph-en="Year" placeholder="السنة">
+    </div>
+    <input id="thesisInstitution" data-ph-ar="الجهة المانحة" data-ph-en="Institution" placeholder="الجهة المانحة">
+    <button class="btn btn-solid btn-small" onclick="addThesis()" data-ar="إضافة الرسالة" data-en="Add Thesis">إضافة الرسالة</button>
+    <div id="thesisStatus" class="status-msg"></div>
+  </div>
+</section>
+
+<!-- NEWS SECTION -->
+<!-- PUBLICATIONS SECTION -->
+<section id="publications">
+  <div class="section-head"><div><div class="eyebrow" data-ar="النتاج العلمي" data-en="Scholarly Output">النتاج العلمي</div><h2 data-ar="الأبحاث المنشورة" data-en="Publications">الأبحاث المنشورة</h2></div></div>
+  <div id="pubList" class="card-list"><div class="loading" data-ar="جارٍ تحميل الأبحاث..." data-en="Loading publications...">جارٍ تحميل الأبحاث...</div></div>
+  <div class="add-box owner-only hidden">
+    <h4 data-ar="إضافة بحث منشور" data-en="Add Publication">إضافة بحث منشور</h4>
+    <input id="pubTitle" data-ph-ar="عنوان البحث" data-ph-en="Paper title" placeholder="عنوان البحث">
+    <div class="grid-2">
+      <input id="pubJournal" data-ph-ar="اسم المجلة / المؤتمر" data-ph-en="Journal / Conference" placeholder="اسم المجلة / المؤتمر">
+      <input id="pubYear" data-ph-ar="سنة النشر" data-ph-en="Year" placeholder="سنة النشر">
+    </div>
+    <input id="pubLink" data-ph-ar="رابط البحث (اختياري)" data-ph-en="Link (optional)" placeholder="رابط البحث (اختياري)">
+    <textarea id="pubAbstract" data-ph-ar="ملخص مختصر (اختياري)" data-ph-en="Abstract (optional)" placeholder="ملخص مختصر (اختياري)"></textarea>
+    <button class="btn btn-solid btn-small" onclick="addPub()" data-ar="إضافة البحث" data-en="Add Publication">إضافة البحث</button>
+    <div id="pubStatus" class="status-msg"></div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS SECTION -->
+<section id="achievements">
+  <div class="section-head"><div><div class="eyebrow" data-ar="تكريم وتميّز" data-en="Honors & Distinction">تكريم وتميّز</div><h2 data-ar="الإنجازات العلمية" data-en="Achievements">الإنجازات العلمية</h2></div></div>
+  <div id="achList" class="card-list"><div class="loading" data-ar="جارٍ تحميل الإنجازات..." data-en="Loading achievements...">جارٍ تحميل الإنجازات...</div></div>
+  <div class="add-box owner-only hidden">
+    <h4 data-ar="إضافة إنجاز" data-en="Add Achievement">إضافة إنجاز</h4>
+    <input id="achTitle" data-ph-ar="عنوان الإنجاز (جائزة، منحة، تكريم...)" data-ph-en="Achievement title (award, grant, honor...)" placeholder="عنوان الإنجاز (جائزة، منحة، تكريم...)">
+    <input id="achYear" data-ph-ar="السنة" data-ph-en="Year" placeholder="السنة">
+    <textarea id="achDesc" data-ph-ar="وصف مختصر" data-ph-en="Short description" placeholder="وصف مختصر"></textarea>
+    <button class="btn btn-solid btn-small" onclick="addAch()" data-ar="إضافة الإنجاز" data-en="Add Achievement">إضافة الإنجاز</button>
+    <div id="achStatus" class="status-msg"></div>
+  </div>
+</section>
+
+<!-- COURSES SECTION -->
+<section id="courses">
+  <div class="section-head"><div><div class="eyebrow" data-ar="التطوير المهني" data-en="Professional Development">التطوير المهني</div><h2 data-ar="الدورات التدريبية" data-en="Training Courses">الدورات التدريبية</h2></div></div>
+  <div id="courseList" class="card-list"><div class="loading" data-ar="جارٍ تحميل الدورات..." data-en="Loading courses...">جارٍ تحميل الدورات...</div></div>
+  <div class="add-box owner-only hidden">
+    <h4 data-ar="إضافة دورة أو شهادة" data-en="Add Course or Certification">إضافة دورة أو شهادة</h4>
+    <input id="courseTitle" data-ph-ar="اسم الدورة / الشهادة" data-ph-en="Course / certification name" placeholder="اسم الدورة / الشهادة">
+    <div class="grid-2">
+      <input id="courseInstitution" data-ph-ar="الجهة المانحة" data-ph-en="Institution" placeholder="الجهة المانحة">
+      <input id="courseYear" data-ph-ar="السنة" data-ph-en="Year" placeholder="السنة">
+    </div>
+    <textarea id="courseDesc" data-ph-ar="وصف مختصر (اختياري)" data-ph-en="Short description (optional)" placeholder="وصف مختصر (اختياري)"></textarea>
+    <button class="btn btn-solid btn-small" onclick="addCourse()" data-ar="إضافة الدورة" data-en="Add Course">إضافة الدورة</button>
+    <div id="courseStatus" class="status-msg"></div>
+  </div>
+</section>
+
+<!-- ACADEMIC LINKS SECTION -->
+<section id="academic-links">
+  <div class="section-head"><div><div class="eyebrow" data-ar="حضور رقمي" data-en="Digital Presence">حضور رقمي</div><h2 data-ar="الهوية الرقمية الأكاديمية" data-en="Digital Scholarly Identity">الهوية الرقمية الأكاديمية</h2></div></div>
+  <div id="linksList" class="card-list"><div class="loading" data-ar="جارٍ تحميل الروابط..." data-en="Loading links...">جارٍ تحميل الروابط...</div></div>
+  <div class="add-box owner-only hidden">
+    <h4 data-ar="إضافة رابط" data-en="Add Link">إضافة رابط</h4>
+    <input id="linkName" data-ph-ar="اسم الموقع (مثال: LinkedIn، ORCID)" data-ph-en="Site name (e.g. LinkedIn, ORCID)" placeholder="اسم الموقع (مثال: LinkedIn، ORCID)">
+    <input id="linkUrl" data-ph-ar="الرابط الكامل" data-ph-en="Full URL" placeholder="الرابط الكامل">
+    <button class="btn btn-solid btn-small" onclick="addLink()" data-ar="إضافة الرابط" data-en="Add Link">إضافة الرابط</button>
+    <div id="linkStatus" class="status-msg"></div>
+  </div>
+</section>
+
+<!-- NEWS SECTION -->
+<section id="news">
+  <div class="section-head"><div><div class="eyebrow" data-ar="تحديثات" data-en="Updates">تحديثات</div><h2 data-ar="آخر الأخبار" data-en="Latest News">آخر الأخبار</h2></div></div>
+  <div id="newsList" class="card-list"><div class="loading" data-ar="جارٍ تحميل الأخبار..." data-en="Loading news...">جارٍ تحميل الأخبار...</div></div>
+  <div class="add-box owner-only hidden">
+    <h4 data-ar="إضافة خبر جديد" data-en="Add News Item">إضافة خبر جديد</h4>
+    <input id="newsTitle" data-ph-ar="عنوان الخبر" data-ph-en="News title" placeholder="عنوان الخبر">
+    <div class="grid-2">
+      <input id="newsDate" type="date">
+      <input id="newsMeta" data-ph-ar="جهة الخبر (اختياري)" data-ph-en="Source (optional)" placeholder="جهة الخبر (اختياري)">
+    </div>
+    <textarea id="newsBody" data-ph-ar="تفاصيل الخبر" data-ph-en="Details" placeholder="تفاصيل الخبر"></textarea>
+    <button class="btn btn-solid btn-small" onclick="addNews()" data-ar="إضافة الخبر" data-en="Add News">إضافة الخبر</button>
+    <div id="newsStatus" class="status-msg"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <div>
+      <div class="eyebrow" data-ar="لنتواصل" data-en="Get in Touch">لنتواصل</div>
+      <h2 data-ar="هل لديك فرصة تدريس أو تعاون بحثي؟" data-en="Have a teaching or research opportunity?">هل لديك فرصة تدريس أو تعاون بحثي؟</h2>
+      <ul class="contact-list">
+        <li><b data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</b>Dr.Sarah.Mahdy@Gmail.com</li>
+        <li><b data-ar="الموقع" data-en="Location">الموقع</b><span data-ar="الإسكندرية، مصر" data-en="Alexandria, Egypt">الإسكندرية، مصر</span></li>
+      </ul>
+    </div>
+    <form class="contact-form" onsubmit="event.preventDefault(); alert(currentLang==='ar' ? 'تم إرسال رسالتك (نموذج تجريبي)' : 'Message sent (demo form)');">
+      <input type="text" data-ph-ar="الاسم" data-ph-en="Name" placeholder="الاسم" required>
+      <input type="email" data-ph-ar="البريد الإلكتروني" data-ph-en="Email" placeholder="البريد الإلكتروني" required>
+      <textarea data-ph-ar="رسالتك" data-ph-en="Your message" placeholder="رسالتك"></textarea>
+      <button type="submit" class="btn btn-gold" data-ar="إرسال" data-en="Send">إرسال</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="signature" data-ar="د. سارة مهدي" data-en="Dr. Sarah Mahdy">د. سارة مهدي</div>
+  <div data-ar="© 2026 د. سارة مهدي — جميع الحقوق محفوظة" data-en="© 2026 Dr. Sarah Mahdy — All Rights Reserved">© 2026 د. سارة مهدي — جميع الحقوق محفوظة</div>
+</footer>
+
+<script>
+/* ============ SUPABASE SETUP ============ */
+const SUPABASE_URL = "https://eubudaqlgzconwsesjry.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_FcfKgekEQ1l8-bljAUcIOg_Zh6Ff-Gp";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
+function toggleMobileMenu(){
+  document.getElementById('navList').classList.toggle('mobile-open');
+}
+document.querySelectorAll('#navList a').forEach(a=>{
+  a.addEventListener('click', ()=>{ document.getElementById('navList').classList.remove('mobile-open'); });
+});
+
+let isOwner = false;
+let cvEditing = false;
+let currentLang = 'ar';
+
+function toggleLang(){
+  currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+  applyLang();
+}
+
+function applyLang(){
+  const isEn = currentLang === 'en';
+  document.documentElement.lang = isEn ? 'en' : 'ar';
+  document.documentElement.dir = isEn ? 'ltr' : 'rtl';
+  document.getElementById('langToggle').textContent = isEn ? 'العربية' : 'English';
+
+  document.querySelectorAll('[data-ar]').forEach(el=>{
+    const val = isEn ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+    if(val !== null) el.innerHTML = val;
+  });
+  document.querySelectorAll('[data-ph-ar]').forEach(el=>{
+    const val = isEn ? el.getAttribute('data-ph-en') : el.getAttribute('data-ph-ar');
+    if(val !== null) el.setAttribute('placeholder', val);
+  });
+
+  if(!cvEditing) renderCv();
+  renderNews_list();
+  renderPubs();
+  renderAch_list();
+  renderCourses_list();
+  renderTheses_list();
+  renderEducation_list();
+  renderLinks_list();
+}
+
+/* ============ AUTH ============ */
+function openLoginModal(){ document.getElementById('loginModal').classList.remove('hidden'); }
+function closeLoginModal(){ document.getElementById('loginModal').classList.add('hidden'); document.getElementById('loginStatus').textContent=''; }
+
+async function doLogin(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPass').value;
+  const statusEl = document.getElementById('loginStatus');
+  statusEl.style.color = 'var(--clay)';
+  statusEl.textContent = 'جارٍ الدخول...';
+  const {data, error} = await sb.auth.signInWithPassword({email, password});
+  if(error){
+    statusEl.textContent = 'خطأ: تأكدي من البريد وكلمة المرور';
+    return;
+  }
+  statusEl.textContent = 'تم الدخول ✓';
+  setTimeout(()=>{ closeLoginModal(); refreshOwnerUI(); }, 600);
+}
+
+async function doLogout(){
+  await sb.auth.signOut();
+  refreshOwnerUI();
+}
+
+async function refreshOwnerUI(){
+  const {data:{session}} = await sb.auth.getSession();
+  isOwner = !!session;
+  document.getElementById('loginBtn').classList.toggle('hidden', isOwner);
+  document.getElementById('logoutBtn').classList.toggle('hidden', !isOwner);
+  document.querySelectorAll('.owner-only').forEach(el=>el.classList.toggle('hidden', !isOwner));
+  if(cvEditing && !isOwner){ toggleCvEdit(); }
+}
+
+/* ============ CV ============ */
+async function loadCv(){
+  const {data, error} = await sb.from('cv_content').select('content, content_en').eq('id',1).single();
+  window._cvData = (!error && data) ? data : null;
+  renderCv();
+}
+function renderCv(){
+  const d = window._cvData;
+  const isEn = currentLang === 'en';
+  let text = d ? (isEn ? (d.content_en || d.content) : d.content) : null;
+  document.getElementById('cvDisplay').textContent = text || (isEn ? 'No CV added yet.' : 'لم تتم إضافة سيرة ذاتية بعد.');
+}
+function toggleCvEdit(){
+  cvEditing = !cvEditing;
+  document.getElementById('cvEditArea').style.display = cvEditing ? 'block' : 'none';
+  document.getElementById('cvDisplay').style.display = cvEditing ? 'none' : 'block';
+  document.getElementById('cvEditBtn').textContent = cvEditing ? 'عرض' : 'تعديل';
+  if(cvEditing){
+    document.getElementById('cvTextarea').value = document.getElementById('cvDisplay').textContent;
+  }
+}
+async function saveCv(){
+  const text = document.getElementById('cvTextarea').value;
+  const {error} = await sb.from('cv_content').upsert({id:1, content:text});
+  const statusEl = document.getElementById('cvStatus');
+  statusEl.textContent = error ? 'حدث خطأ أثناء الحفظ (سجّلي الدخول أولاً)' : 'تم الحفظ ✓';
+  if(!error){ await loadCv(); toggleCvEdit(); }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
+/* ============ NEWS ============ */
+function renderNews(n){
+  const isEn = currentLang === 'en';
+  const title = isEn ? (n.title_en || n.title) : n.title;
+  const meta = isEn ? (n.meta_en || n.meta) : n.meta;
+  const body = isEn ? (n.body_en || n.body) : n.body;
+  const delLabel = isEn ? 'Delete' : 'حذف';
+  const dateLocale = isEn ? 'en-US' : 'ar-EG';
+  return `<div class="item-card">
+    <button class="btn btn-danger row-actions owner-only ${isOwner?'':'hidden'}" onclick="deleteRow('news_items','${n.id}', loadNews)">${delLabel}</button>
+    <div class="date">${n.item_date ? new Date(n.item_date).toLocaleDateString(dateLocale,{year:'numeric',month:'long',day:'numeric'}) : ''}${meta ? ' · ' + escapeHtml(meta) : ''}</div>
+    <h3>${escapeHtml(title)}</h3>
+    <p>${escapeHtml(body||'')}</p>
+  </div>`;
+}
+async function loadNews(){
+  const {data, error} = await sb.from('news_items').select('*').order('created_at',{ascending:false});
+  window._newsData = (!error && data) ? data : [];
+  renderNews_list();
+}
+function renderNews_list(){
+  const container = document.getElementById('newsList');
+  const data = window._newsData || [];
+  if(data.length===0){ container.innerHTML = `<div class="empty-note">${currentLang==='en' ? 'No news added yet.' : 'لا توجد أخبار مضافة بعد.'}</div>`; return; }
+  container.innerHTML = data.map(renderNews).join('');
+}
+async function addNews(){
+  const title = document.getElementById('newsTitle').value.trim();
+  const statusEl = document.getElementById('newsStatus');
+  if(!title){ statusEl.textContent = 'الرجاء إدخال عنوان الخبر'; return; }
+  const {error} = await sb.from('news_items').insert({
+    title, item_date: document.getElementById('newsDate').value || null,
+    meta: document.getElementById('newsMeta').value.trim(),
+    body: document.getElementById('newsBody').value.trim()
+  });
+  statusEl.textContent = error ? 'حدث خطأ (سجّلي الدخول أولاً)' : 'تمت الإضافة ✓';
+  if(!error){
+    ['newsTitle','newsDate','newsMeta','newsBody'].forEach(id=>document.getElementById(id).value='');
+    loadNews();
+  }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
+/* ============ PUBLICATIONS ============ */
+function renderPub(p){
+  const isEn = currentLang === 'en';
+  const title = isEn ? (p.title_en || p.title) : p.title;
+  const journal = isEn ? (p.journal_en || p.journal) : p.journal;
+  const abstract = isEn ? (p.abstract_en || p.abstract) : p.abstract;
+  const linkLabel = isEn ? 'Read paper ↗' : 'رابط البحث ↗';
+  const delLabel = isEn ? 'Delete' : 'حذف';
+  return `<div class="item-card">
+    <button class="btn btn-danger row-actions owner-only ${isOwner?'':'hidden'}" onclick="deleteRow('publications','${p.id}', loadPubs)">${delLabel}</button>
+    <div class="date">${escapeHtml(journal||'')}${p.year ? ' · ' + escapeHtml(p.year) : ''}</div>
+    <h3>${escapeHtml(title)}</h3>
+    ${abstract ? `<p>${escapeHtml(abstract)}</p>` : ''}
+    ${p.link ? `<div class="meta"><a href="${escapeHtml(p.link)}" target="_blank" rel="noopener">${linkLabel}</a></div>` : ''}
+  </div>`;
+}
+async function loadPubs(){
+  const {data, error} = await sb.from('publications').select('*').order('created_at',{ascending:false});
+  window._pubData = (!error && data) ? data : [];
+  renderPubs();
+}
+function renderPubs(){
+  const container = document.getElementById('pubList');
+  const data = window._pubData || [];
+  if(data.length===0){ container.innerHTML = `<div class="empty-note">${currentLang==='en' ? 'No publications added yet.' : 'لا توجد أبحاث مضافة بعد.'}</div>`; return; }
+  container.innerHTML = data.map(renderPub).join('');
+}
+async function addPub(){
+  const title = document.getElementById('pubTitle').value.trim();
+  const statusEl = document.getElementById('pubStatus');
+  if(!title){ statusEl.textContent = 'الرجاء إدخال عنوان البحث'; return; }
+  const {error} = await sb.from('publications').insert({
+    title, journal: document.getElementById('pubJournal').value.trim(),
+    year: document.getElementById('pubYear').value.trim(),
+    link: document.getElementById('pubLink').value.trim(),
+    abstract: document.getElementById('pubAbstract').value.trim()
+  });
+  statusEl.textContent = error ? 'حدث خطأ (سجّلي الدخول أولاً)' : 'تمت الإضافة ✓';
+  if(!error){
+    ['pubTitle','pubJournal','pubYear','pubLink','pubAbstract'].forEach(id=>document.getElementById(id).value='');
+    loadPubs();
+  }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
+/* ============ ACHIEVEMENTS ============ */
+function renderAch(a){
+  const isEn = currentLang === 'en';
+  const title = isEn ? (a.title_en || a.title) : a.title;
+  const desc = isEn ? (a.description_en || a.description) : a.description;
+  const delLabel = isEn ? 'Delete' : 'حذف';
+  return `<div class="item-card">
+    <button class="btn btn-danger row-actions owner-only ${isOwner?'':'hidden'}" onclick="deleteRow('achievements','${a.id}', loadAch)">${delLabel}</button>
+    <div class="date">${escapeHtml(a.year||'')}</div>
+    <h3>${escapeHtml(title)}</h3>
+    ${desc ? `<p>${escapeHtml(desc)}</p>` : ''}
+  </div>`;
+}
+async function loadAch(){
+  const {data, error} = await sb.from('achievements').select('*').order('created_at',{ascending:false});
+  window._achData = (!error && data) ? data : [];
+  renderAch_list();
+}
+function renderAch_list(){
+  const container = document.getElementById('achList');
+  const data = window._achData || [];
+  if(data.length===0){ container.innerHTML = `<div class="empty-note">${currentLang==='en' ? 'No achievements added yet.' : 'لا توجد إنجازات مضافة بعد.'}</div>`; return; }
+  container.innerHTML = data.map(renderAch).join('');
+}
+async function addAch(){
+  const title = document.getElementById('achTitle').value.trim();
+  const statusEl = document.getElementById('achStatus');
+  if(!title){ statusEl.textContent = 'الرجاء إدخال عنوان الإنجاز'; return; }
+  const {error} = await sb.from('achievements').insert({
+    title, year: document.getElementById('achYear').value.trim(),
+    description: document.getElementById('achDesc').value.trim()
+  });
+  statusEl.textContent = error ? 'حدث خطأ (سجّلي الدخول أولاً)' : 'تمت الإضافة ✓';
+  if(!error){
+    ['achTitle','achYear','achDesc'].forEach(id=>document.getElementById(id).value='');
+    loadAch();
+  }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
+/* ============ ACADEMIC LINKS ============ */
+function renderLink(l){
+  const delLabel = currentLang==='en' ? 'Delete' : 'حذف';
+  return `<div class="item-card">
+    <button class="btn btn-danger row-actions owner-only ${isOwner?'':'hidden'}" onclick="deleteRow('academic_links','${l.id}', loadLinks)">${delLabel}</button>
+    <h3><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.name)} ↗</a></h3>
+  </div>`;
+}
+async function loadLinks(){
+  const {data, error} = await sb.from('academic_links').select('*').order('created_at',{ascending:true});
+  window._linksData = (!error && data) ? data : [];
+  renderLinks_list();
+}
+function renderLinks_list(){
+  const container = document.getElementById('linksList');
+  const data = window._linksData || [];
+  if(data.length===0){ container.innerHTML = `<div class="empty-note">${currentLang==='en' ? 'No links added yet.' : 'لا توجد روابط مضافة بعد.'}</div>`; return; }
+  container.innerHTML = data.map(renderLink).join('');
+}
+async function addLink(){
+  const name = document.getElementById('linkName').value.trim();
+  const url = document.getElementById('linkUrl').value.trim();
+  const statusEl = document.getElementById('linkStatus');
+  if(!name || !url){ statusEl.textContent = currentLang==='en' ? 'Please fill both fields' : 'الرجاء ملء الاسم والرابط'; return; }
+  const {error} = await sb.from('academic_links').insert({name, url});
+  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  if(!error){
+    document.getElementById('linkName').value=''; document.getElementById('linkUrl').value='';
+    loadLinks();
+  }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
+/* ============ EDUCATION ============ */
+function renderEducation(e){
+  const isEn = currentLang === 'en';
+  const degree = isEn ? (e.degree_en || e.degree) : e.degree;
+  const institution = isEn ? (e.institution_en || e.institution) : e.institution;
+  const delLabel = isEn ? 'Delete' : 'حذف';
+  return `<div class="item-card">
+    <button class="btn btn-danger row-actions owner-only ${isOwner?'':'hidden'}" onclick="deleteRow('education','${e.id}', loadEducation)">${delLabel}</button>
+    <div class="date">${escapeHtml(e.year||'')}</div>
+    <h3>${escapeHtml(degree)}</h3>
+    ${institution ? `<p>${escapeHtml(institution)}</p>` : ''}
+  </div>`;
+}
+async function loadEducation(){
+  const {data, error} = await sb.from('education').select('*').order('year',{ascending:false});
+  window._eduData = (!error && data) ? data : [];
+  renderEducation_list();
+}
+function renderEducation_list(){
+  const container = document.getElementById('educationList');
+  const data = window._eduData || [];
+  if(data.length===0){ container.innerHTML = `<div class="empty-note">${currentLang==='en' ? 'No qualifications added yet.' : 'لا توجد مؤهلات مضافة بعد.'}</div>`; return; }
+  container.innerHTML = data.map(renderEducation).join('');
+}
+async function addEducation(){
+  const degree = document.getElementById('eduDegree').value.trim();
+  const statusEl = document.getElementById('eduStatus');
+  if(!degree){ statusEl.textContent = currentLang==='en' ? 'Please enter a degree' : 'الرجاء إدخال الدرجة العلمية'; return; }
+  const {error} = await sb.from('education').insert({
+    degree, institution: document.getElementById('eduInstitution').value.trim(),
+    year: document.getElementById('eduYear').value.trim()
+  });
+  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  if(!error){
+    ['eduDegree','eduInstitution','eduYear'].forEach(id=>document.getElementById(id).value='');
+    loadEducation();
+  }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
+/* ============ THESES ============ */
+function renderThesis(t){
+  const isEn = currentLang === 'en';
+  const title = isEn ? (t.title_en || t.title) : t.title;
+  const degree = isEn ? (t.degree_en || t.degree) : t.degree;
+  const institution = isEn ? (t.institution_en || t.institution) : t.institution;
+  const delLabel = isEn ? 'Delete' : 'حذف';
+  return `<div class="item-card">
+    <button class="btn btn-danger row-actions owner-only ${isOwner?'':'hidden'}" onclick="deleteRow('theses','${t.id}', loadTheses)">${delLabel}</button>
+    <div class="date">${escapeHtml(degree||'')}${t.year ? ' · ' + escapeHtml(t.year) : ''}</div>
+    <h3>${escapeHtml(title)}</h3>
+    ${institution ? `<p>${escapeHtml(institution)}</p>` : ''}
+  </div>`;
+}
+async function loadTheses(){
+  const {data, error} = await sb.from('theses').select('*').order('year',{ascending:false});
+  window._thesisData = (!error && data) ? data : [];
+  renderTheses_list();
+}
+function renderTheses_list(){
+  const container = document.getElementById('thesisList');
+  const data = window._thesisData || [];
+  if(data.length===0){ container.innerHTML = `<div class="empty-note">${currentLang==='en' ? 'No theses added yet.' : 'لا توجد رسائل مضافة بعد.'}</div>`; return; }
+  container.innerHTML = data.map(renderThesis).join('');
+}
+async function addThesis(){
+  const title = document.getElementById('thesisTitle').value.trim();
+  const statusEl = document.getElementById('thesisStatus');
+  if(!title){ statusEl.textContent = currentLang==='en' ? 'Please enter a thesis title' : 'الرجاء إدخال عنوان الرسالة'; return; }
+  const {error} = await sb.from('theses').insert({
+    title, degree: document.getElementById('thesisDegree').value.trim(),
+    year: document.getElementById('thesisYear').value.trim(),
+    institution: document.getElementById('thesisInstitution').value.trim()
+  });
+  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  if(!error){
+    ['thesisTitle','thesisDegree','thesisYear','thesisInstitution'].forEach(id=>document.getElementById(id).value='');
+    loadTheses();
+  }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
+/* ============ COURSES ============ */
+function renderCourse(c){
+  const isEn = currentLang === 'en';
+  const title = isEn ? (c.title_en || c.title) : c.title;
+  const institution = isEn ? (c.institution_en || c.institution) : c.institution;
+  const desc = isEn ? (c.description_en || c.description) : c.description;
+  const delLabel = isEn ? 'Delete' : 'حذف';
+  return `<div class="item-card">
+    <button class="btn btn-danger row-actions owner-only ${isOwner?'':'hidden'}" onclick="deleteRow('courses','${c.id}', loadCourses)">${delLabel}</button>
+    <div class="date">${escapeHtml(institution||'')}${c.year ? ' · ' + escapeHtml(c.year) : ''}</div>
+    <h3>${escapeHtml(title)}</h3>
+    ${desc ? `<p>${escapeHtml(desc)}</p>` : ''}
+  </div>`;
+}
+async function loadCourses(){
+  const {data, error} = await sb.from('courses').select('*').order('created_at',{ascending:false});
+  window._courseData = (!error && data) ? data : [];
+  renderCourses_list();
+}
+function renderCourses_list(){
+  const container = document.getElementById('courseList');
+  const data = window._courseData || [];
+  if(data.length===0){ container.innerHTML = `<div class="empty-note">${currentLang==='en' ? 'No courses added yet.' : 'لا توجد دورات مضافة بعد.'}</div>`; return; }
+  container.innerHTML = data.map(renderCourse).join('');
+}
+async function addCourse(){
+  const title = document.getElementById('courseTitle').value.trim();
+  const statusEl = document.getElementById('courseStatus');
+  if(!title){ statusEl.textContent = currentLang==='en' ? 'Please enter a course title' : 'الرجاء إدخال اسم الدورة'; return; }
+  const {error} = await sb.from('courses').insert({
+    title, institution: document.getElementById('courseInstitution').value.trim(),
+    year: document.getElementById('courseYear').value.trim(),
+    description: document.getElementById('courseDesc').value.trim()
+  });
+  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  if(!error){
+    ['courseTitle','courseInstitution','courseYear','courseDesc'].forEach(id=>document.getElementById(id).value='');
+    loadCourses();
+  }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
+/* ============ SHARED HELPERS ============ */
+async function deleteRow(table, id, reloadFn){
+  if(!confirm('هل تريدين حذف هذا العنصر؟')) return;
+  await sb.from(table).delete().eq('id', id);
+  reloadFn();
+}
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+/* ============ INIT ============ */
+sb.auth.onAuthStateChange((event, session)=>{ refreshOwnerUI(); });
+refreshOwnerUI();
+loadCv(); loadNews(); loadPubs(); loadAch(); loadCourses(); loadTheses(); loadEducation(); loadLinks();
+</script>
+
+</body>
+</html>
