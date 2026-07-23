@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="7KA6fO_ddJZs4lYfxa1pXguZC8Sh3retvYIr6DBIuFk" />
 <title>د. سارة مهدي | خبيرة تسويق وباحثة أكاديمية</title>
+<meta name="description" content="د. سارة مهدي - دكتوراه في إدارة الأعمال (تسويق) بتقدير امتياز، باحثة متخصصة في تسويق المؤثرين والمؤثرين الافتراضيين والتسويق الرقمي. سيرة ذاتية، أبحاث منشورة، وفرص تدريس جامعي.">
+<meta name="keywords" content="د سارة مهدي, تسويق المؤثرين, تسويق رقمي, أستاذ تسويق, دكتوراه تسويق, Influencer Marketing, Digital Marketing PhD, Sarah Mahdy">
+<meta property="og:title" content="د. سارة مهدي | خبيرة تسويق وباحثة أكاديمية">
+<meta property="og:description" content="باحثة أكاديمية متخصصة في التسويق الرقمي وتسويق المؤثرين. سيرة ذاتية، أبحاث منشورة، وإنجازات علمية.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://drsarahmahdy.github.io/">
+<link rel="canonical" href="https://drsarahmahdy.github.io/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -64,6 +71,12 @@
   .item-card .meta{font-size:.82rem; opacity:.65; margin-top:6px;}
   .item-card .row-actions{position:absolute; left:16px; top:16px;}
   .empty-note{opacity:.55; font-size:.92rem; padding:20px 0;}
+
+  .gallery-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px;}
+  .gallery-item{position:relative; border-radius:4px; overflow:hidden; background:var(--paper-deep);}
+  .gallery-item img{width:100%; height:200px; object-fit:cover; display:block;}
+  .gallery-item .caption{padding:10px 12px; font-size:.85rem; opacity:.8;}
+  .gallery-item .row-actions{position:absolute; left:8px; top:8px;}
 
   .add-box{background:#fff; border:1px solid var(--line); border-radius:4px; padding:22px; margin-top:22px;}
   .add-box h4{font-size:1rem; margin-bottom:14px;}
@@ -148,6 +161,7 @@
       <li><a href="#courses" data-ar="الدورات التدريبية" data-en="Courses">الدورات التدريبية</a></li>
       <li><a href="#academic-links" data-ar="الهوية الرقمية الأكاديمية" data-en="Digital Scholarly Identity">الهوية الرقمية الأكاديمية</a></li>
       <li><a href="#news" data-ar="آخر الأخبار" data-en="News">آخر الأخبار</a></li>
+      <li><a href="#gallery" data-ar="معرض الصور" data-en="Gallery">معرض الصور</a></li>
       <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
       <li><button id="loginBtn" onclick="openLoginModal()" data-ar="تسجيل الدخول" data-en="Log In">تسجيل الدخول</button></li>
       <li><button id="logoutBtn" onclick="doLogout()" class="hidden" data-ar="تسجيل الخروج" data-en="Log Out">تسجيل الخروج</button></li>
@@ -333,6 +347,19 @@
   </div>
 </section>
 
+<!-- GALLERY SECTION -->
+<section id="gallery">
+  <div class="section-head"><div><div class="eyebrow" data-ar="لحظات وإنجازات" data-en="Moments & Achievements">لحظات وإنجازات</div><h2 data-ar="معرض الصور" data-en="Gallery">معرض الصور</h2></div></div>
+  <div id="galleryGrid" class="gallery-grid"><div class="loading" data-ar="جارٍ تحميل الصور..." data-en="Loading photos...">جارٍ تحميل الصور...</div></div>
+  <div class="add-box owner-only hidden">
+    <h4 data-ar="إضافة صورة" data-en="Add Photo">إضافة صورة</h4>
+    <input id="galleryUrl" data-ph-ar="رابط الصورة (من Imgur أو Google Drive)" data-ph-en="Image URL (from Imgur or Google Drive)" placeholder="رابط الصورة (من Imgur أو Google Drive)">
+    <input id="galleryCaption" data-ph-ar="وصف الصورة (اختياري)" data-ph-en="Caption (optional)" placeholder="وصف الصورة (اختياري)">
+    <button class="btn btn-solid btn-small" onclick="addGalleryImage()" data-ar="إضافة الصورة" data-en="Add Photo">إضافة الصورة</button>
+    <div id="galleryStatus" class="status-msg"></div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="contact-wrap">
     <div>
@@ -403,6 +430,7 @@ function applyLang(){
   renderTheses_list();
   renderEducation_list();
   renderLinks_list();
+  renderGallery_list();
 }
 
 /* ============ AUTH ============ */
@@ -596,6 +624,43 @@ async function addAch(){
   setTimeout(()=>statusEl.textContent='', 2500);
 }
 
+/* ============ GALLERY ============ */
+function renderGalleryItem(g){
+  const isEn = currentLang === 'en';
+  const caption = isEn ? (g.caption_en || g.caption) : g.caption;
+  const delLabel = isEn ? 'Delete' : 'حذف';
+  return `<div class="gallery-item">
+    <button class="btn btn-danger row-actions owner-only ${isOwner?'':'hidden'}" onclick="deleteRow('gallery','${g.id}', loadGallery)">${delLabel}</button>
+    <img src="${escapeHtml(g.image_url)}" alt="${escapeHtml(caption||'')}" loading="lazy">
+    ${caption ? `<div class="caption">${escapeHtml(caption)}</div>` : ''}
+  </div>`;
+}
+async function loadGallery(){
+  const {data, error} = await sb.from('gallery').select('*').order('created_at',{ascending:false});
+  window._galleryData = (!error && data) ? data : [];
+  renderGallery_list();
+}
+function renderGallery_list(){
+  const container = document.getElementById('galleryGrid');
+  const data = window._galleryData || [];
+  if(data.length===0){ container.innerHTML = `<div class="empty-note">${currentLang==='en' ? 'No photos added yet.' : 'لا توجد صور مضافة بعد.'}</div>`; return; }
+  container.innerHTML = data.map(renderGalleryItem).join('');
+}
+async function addGalleryImage(){
+  const url = document.getElementById('galleryUrl').value.trim();
+  const statusEl = document.getElementById('galleryStatus');
+  if(!url){ statusEl.textContent = currentLang==='en' ? 'Please enter an image URL' : 'الرجاء إدخال رابط الصورة'; return; }
+  const {error} = await sb.from('gallery').insert({
+    image_url: url, caption: document.getElementById('galleryCaption').value.trim()
+  });
+  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  if(!error){
+    document.getElementById('galleryUrl').value=''; document.getElementById('galleryCaption').value='';
+    loadGallery();
+  }
+  setTimeout(()=>statusEl.textContent='', 2500);
+}
+
 /* ============ ACADEMIC LINKS ============ */
 function renderLink(l){
   const delLabel = currentLang==='en' ? 'Delete' : 'حذف';
@@ -766,7 +831,7 @@ function escapeHtml(str){
 /* ============ INIT ============ */
 sb.auth.onAuthStateChange((event, session)=>{ refreshOwnerUI(); });
 refreshOwnerUI();
-loadCv(); loadNews(); loadPubs(); loadAch(); loadCourses(); loadTheses(); loadEducation(); loadLinks();
+loadCv(); loadNews(); loadPubs(); loadAch(); loadCourses(); loadTheses(); loadEducation(); loadLinks(); loadGallery();
 </script>
 
 </body>
