@@ -186,6 +186,19 @@
   </div>
 </div>
 
+<!-- NEW PASSWORD MODAL (for recovery links) -->
+<div id="newPasswordModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <h3 data-ar="تعيين كلمة سر جديدة" data-en="Set New Password">تعيين كلمة سر جديدة</h3>
+    <p class="hint" data-ar="اكتبي كلمة السر الجديدة اللي عايزة تستخدميها" data-en="Enter the new password you'd like to use">اكتبي كلمة السر الجديدة اللي عايزة تستخدميها</p>
+    <input id="newPasswordInput" type="password" data-ph-ar="كلمة السر الجديدة" data-ph-en="New password" placeholder="كلمة السر الجديدة">
+    <div class="modal-actions">
+      <button class="btn btn-solid btn-small" onclick="submitNewPassword()" data-ar="حفظ" data-en="Save">حفظ</button>
+    </div>
+    <div id="newPasswordStatus" class="status-msg"></div>
+  </div>
+</div>
+
 <section class="hero">
   <div>
     <div class="eyebrow" data-ar="دكتوراه في إدارة الأعمال (تسويق) — بتقدير امتياز" data-en="PhD in Business Administration (Marketing) — Distinction">دكتوراه في إدارة الأعمال (تسويق) — بتقدير امتياز</div>
@@ -491,7 +504,7 @@ async function saveCv(){
   const text = document.getElementById('cvTextarea').value;
   const {error} = await sb.from('cv_content').upsert({id:1, content:text});
   const statusEl = document.getElementById('cvStatus');
-  statusEl.textContent = error ? 'حدث خطأ أثناء الحفظ (سجّلي الدخول أولاً)' : 'تم الحفظ ✓';
+  statusEl.textContent = error ? ('خطأ: ' + error.message) : 'تم الحفظ ✓';
   if(!error){ await loadCv(); toggleCvEdit(); }
   setTimeout(()=>statusEl.textContent='', 2500);
 }
@@ -531,7 +544,7 @@ async function addNews(){
     meta: document.getElementById('newsMeta').value.trim(),
     body: document.getElementById('newsBody').value.trim()
   });
-  statusEl.textContent = error ? 'حدث خطأ (سجّلي الدخول أولاً)' : 'تمت الإضافة ✓';
+  statusEl.textContent = error ? ('خطأ: ' + error.message) : 'تمت الإضافة ✓';
   if(!error){
     ['newsTitle','newsDate','newsMeta','newsBody'].forEach(id=>document.getElementById(id).value='');
     loadNews();
@@ -576,7 +589,7 @@ async function addPub(){
     link: document.getElementById('pubLink').value.trim(),
     abstract: document.getElementById('pubAbstract').value.trim()
   });
-  statusEl.textContent = error ? 'حدث خطأ (سجّلي الدخول أولاً)' : 'تمت الإضافة ✓';
+  statusEl.textContent = error ? ('خطأ: ' + error.message) : 'تمت الإضافة ✓';
   if(!error){
     ['pubTitle','pubJournal','pubYear','pubLink','pubAbstract'].forEach(id=>document.getElementById(id).value='');
     loadPubs();
@@ -616,7 +629,7 @@ async function addAch(){
     title, year: document.getElementById('achYear').value.trim(),
     description: document.getElementById('achDesc').value.trim()
   });
-  statusEl.textContent = error ? 'حدث خطأ (سجّلي الدخول أولاً)' : 'تمت الإضافة ✓';
+  statusEl.textContent = error ? ('خطأ: ' + error.message) : 'تمت الإضافة ✓';
   if(!error){
     ['achTitle','achYear','achDesc'].forEach(id=>document.getElementById(id).value='');
     loadAch();
@@ -653,7 +666,7 @@ async function addGalleryImage(){
   const {error} = await sb.from('gallery').insert({
     image_url: url, caption: document.getElementById('galleryCaption').value.trim()
   });
-  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  statusEl.textContent = error ? (currentLang==='en' ? ('Error: ' + error.message) : ('خطأ: ' + error.message)) : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
   if(!error){
     document.getElementById('galleryUrl').value=''; document.getElementById('galleryCaption').value='';
     loadGallery();
@@ -686,7 +699,7 @@ async function addLink(){
   const statusEl = document.getElementById('linkStatus');
   if(!name || !url){ statusEl.textContent = currentLang==='en' ? 'Please fill both fields' : 'الرجاء ملء الاسم والرابط'; return; }
   const {error} = await sb.from('academic_links').insert({name, url});
-  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  statusEl.textContent = error ? (currentLang==='en' ? ('Error: ' + error.message) : ('خطأ: ' + error.message)) : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
   if(!error){
     document.getElementById('linkName').value=''; document.getElementById('linkUrl').value='';
     loadLinks();
@@ -726,7 +739,7 @@ async function addEducation(){
     degree, institution: document.getElementById('eduInstitution').value.trim(),
     year: document.getElementById('eduYear').value.trim()
   });
-  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  statusEl.textContent = error ? (currentLang==='en' ? ('Error: ' + error.message) : ('خطأ: ' + error.message)) : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
   if(!error){
     ['eduDegree','eduInstitution','eduYear'].forEach(id=>document.getElementById(id).value='');
     loadEducation();
@@ -768,7 +781,7 @@ async function addThesis(){
     year: document.getElementById('thesisYear').value.trim(),
     institution: document.getElementById('thesisInstitution').value.trim()
   });
-  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  statusEl.textContent = error ? (currentLang==='en' ? ('Error: ' + error.message) : ('خطأ: ' + error.message)) : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
   if(!error){
     ['thesisTitle','thesisDegree','thesisYear','thesisInstitution'].forEach(id=>document.getElementById(id).value='');
     loadTheses();
@@ -810,7 +823,7 @@ async function addCourse(){
     year: document.getElementById('courseYear').value.trim(),
     description: document.getElementById('courseDesc').value.trim()
   });
-  statusEl.textContent = error ? (currentLang==='en' ? 'Error (log in first)' : 'حدث خطأ (سجّلي الدخول أولاً)') : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
+  statusEl.textContent = error ? (currentLang==='en' ? ('Error: ' + error.message) : ('خطأ: ' + error.message)) : (currentLang==='en' ? 'Added ✓' : 'تمت الإضافة ✓');
   if(!error){
     ['courseTitle','courseInstitution','courseYear','courseDesc'].forEach(id=>document.getElementById(id).value='');
     loadCourses();
@@ -829,8 +842,35 @@ function escapeHtml(str){
 }
 
 /* ============ INIT ============ */
+/* ============ PASSWORD RECOVERY ============ */
+function checkForRecoveryLink(){
+  const hash = window.location.hash;
+  if(hash && hash.includes('type=recovery')){
+    document.getElementById('newPasswordModal').classList.remove('hidden');
+  }
+}
+async function submitNewPassword(){
+  const newPass = document.getElementById('newPasswordInput').value;
+  const statusEl = document.getElementById('newPasswordStatus');
+  if(!newPass || newPass.length < 6){
+    statusEl.textContent = currentLang==='en' ? 'Password must be at least 6 characters' : 'كلمة السر لازم تكون 6 حروف على الأقل';
+    return;
+  }
+  const {error} = await sb.auth.updateUser({password: newPass});
+  if(error){
+    statusEl.textContent = currentLang==='en' ? 'Error: ' + error.message : 'حدث خطأ، حاولي تاني';
+    return;
+  }
+  statusEl.textContent = currentLang==='en' ? 'Password updated ✓ You can log in now' : 'تم تحديث كلمة السر ✓ تقدري تسجلي دخول دلوقتي';
+  setTimeout(()=>{
+    document.getElementById('newPasswordModal').classList.add('hidden');
+    history.replaceState(null, '', window.location.pathname);
+  }, 1800);
+}
+
 sb.auth.onAuthStateChange((event, session)=>{ refreshOwnerUI(); });
 refreshOwnerUI();
+checkForRecoveryLink();
 loadCv(); loadNews(); loadPubs(); loadAch(); loadCourses(); loadTheses(); loadEducation(); loadLinks(); loadGallery();
 </script>
 
