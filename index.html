@@ -151,27 +151,26 @@
   <nav>
     <div class="brand" data-ar="د. سارة <span>مهدي</span>" data-en="Dr. Sarah <span>Mahdy</span>">د. سارة <span>مهدي</span></div>
     
-    <!-- نقل الزر إلى هنا ليكون مستقلاً ودائماً ظاهر -->
-    <div class="nav-controls">
+    <!-- هذه الحاوية الجديدة تضمن ظهور زر اللغة دائماً بجانب اسمك -->
+    <div class="nav-actions">
       <button id="langToggle" onclick="toggleLang()">English</button>
+      <button id="loginBtn" class="owner-only-btn" onclick="openLoginModal()" data-ar="دخول" data-en="Login">دخول</button>
+      <button id="logoutBtn" onclick="doLogout()" class="hidden" data-ar="خروج" data-en="Logout">خروج</button>
       <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     </div>
 
     <ul id="navList">
       <li><a href="#about" data-ar="نبذة" data-en="About">نبذة</a></li>
-      <li><a href="#cv" data-ar="الاهتمامات البحثية" data-en="Research Interests">الاهتمامات البحثية</a></li>
-      <li><a href="#education" data-ar="المؤهلات العلمية" data-en="Education">المؤهلات العلمية</a></li>
-      <li><a href="#theses" data-ar="الرسائل العلمية" data-en="Theses">الرسائل العلمية</a></li>
-      <li><a href="#publications" data-ar="الأبحاث المنشورة" data-en="Publications">الأبحاث المنشورة</a></li>
+      <li><a href="#cv" data-ar="الاهتمامات" data-en="Interests">الاهتمامات</a></li>
+      <li><a href="#education" data-ar="المؤهلات" data-en="Education">المؤهلات</a></li>
+      <li><a href="#theses" data-ar="الرسائل" data-en="Theses">الرسائل</a></li>
+      <li><a href="#publications" data-ar="الأبحاث" data-en="Publications">الأبحاث</a></li>
       <li><a href="#achievements" data-ar="الإنجازات" data-en="Achievements">الإنجازات</a></li>
-      <li><a href="#courses" data-ar="الدورات التدريبية" data-en="Courses">الدورات التدريبية</a></li>
-      <li><a href="#academic-links" data-ar="الهوية الرقمية الأكاديمية" data-en="Digital Scholarly Identity">الهوية الرقمية الأكاديمية</a></li>
-      <li><a href="#news" data-ar="آخر الأخبار" data-en="News">آخر الأخبار</a></li>
-      <li><a href="#gallery" data-ar="معرض الصور" data-en="Gallery">معرض الصور</a></li>
+      <li><a href="#courses" data-ar="الدورات" data-en="Courses">الدورات</a></li>
+      <li><a href="#academic-links" data-ar="الهوية الرقمية" data-en="Identity">الهوية الرقمية</a></li>
+      <li><a href="#news" data-ar="الأخبار" data-en="News">الأخبار</a></li>
+      <li><a href="#gallery" data-ar="الصور" data-en="Gallery">الصور</a></li>
       <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
-      <li><button id="loginBtn" onclick="openLoginModal()" data-ar="تسجيل الدخول" data-en="Log In">تسجيل الدخول</button></li>
-      <li><button id="logoutBtn" onclick="doLogout()" class="hidden" data-ar="تسجيل الخروج" data-en="Log Out">تسجيل الخروج</button></li>
-      <!-- قم بحذف السطر القديم للـ langToggle من هنا -->
     </ul>
   </nav>
 </header>
