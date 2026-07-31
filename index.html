@@ -606,19 +606,29 @@ async function addPub(){
   const title = document.getElementById('pubTitle').value.trim();
   const statusEl = document.getElementById('pubStatus');
   if(!title){ statusEl.textContent = 'الرجاء إدخال عنوان البحث'; return; }
+  
   const {error} = await sb.from('publications').insert({
-    title, journal: document.getElementById('pubJournal').value.trim(),
+    title, 
+    // تعديل هنا: أخذ القيمة من الحقلين الجديدين
+    journal: document.getElementById('pubJournalAr').value.trim(),
+    journal_en: document.getElementById('pubJournalEn').value.trim(), 
     year: document.getElementById('pubYear').value.trim(),
     link: document.getElementById('pubLink').value.trim(),
     abstract: document.getElementById('pubAbstract').value.trim()
   });
+  
   statusEl.textContent = error ? ('خطأ: ' + error.message) : 'تمت الإضافة ✓';
   if(!error){
-    ['pubTitle','pubJournal','pubYear','pubLink','pubAbstract'].forEach(id=>document.getElementById(id).value='');
+    // تعديل هنا: مسح الحقول الجديدة بعد الإضافة
+    ['pubTitle','pubJournalAr','pubJournalEn','pubYear','pubLink','pubAbstract'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.value = '';
+    });
     loadPubs();
   }
   setTimeout(()=>statusEl.textContent='', 2500);
 }
+
 
 /* ============ ACHIEVEMENTS ============ */
 function renderAch(a){
