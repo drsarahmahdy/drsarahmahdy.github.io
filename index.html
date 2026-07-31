@@ -447,25 +447,31 @@ function applyLang(){
   const isEn = currentLang === 'en';
   document.documentElement.lang = isEn ? 'en' : 'ar';
   document.documentElement.dir = isEn ? 'ltr' : 'rtl';
-  document.getElementById('langToggle').textContent = isEn ? 'العربية' : 'English';
+  
+  const langToggle = document.getElementById('langToggle');
+  if(langToggle) langToggle.textContent = isEn ? 'العربية' : 'English';
 
-  document.querySelectorAll('[data-ar]').forEach(el=>{
+  // تبديل النصوص
+  document.querySelectorAll('[data-ar]').forEach(el => {
     const val = isEn ? el.getAttribute('data-en') : el.getAttribute('data-ar');
     if(val !== null) el.innerHTML = val;
   });
-  document.querySelectorAll('[data-ph-ar]').forEach(el=>{
+
+  // تبديل النصوص في خانات الإدخال
+  document.querySelectorAll('[data-ph-ar]').forEach(el => {
     const val = isEn ? el.getAttribute('data-ph-en') : el.getAttribute('data-ph-ar');
     if(val !== null) el.setAttribute('placeholder', val);
   });
 
-  // --- إضافة تبديل الإنفوجرافيك تلقائياً ---
+  // --- تبديل صورة الإنفوجرافيك ---
   const cvImg = document.getElementById('cv-img');
   if(cvImg) {
-    cvImg.src = isEn ? cvImg.getAttribute('data-en-src') : cvImg.getAttribute('data-ar-src');
+    const newSrc = isEn ? cvImg.getAttribute('data-en-src') : cvImg.getAttribute('data-ar-src');
+    if(newSrc) cvImg.src = newSrc;
   }
 
-  // --- تحديث كافة القوائم (الأبحاث، الأخبار، إلخ) ---
-  if(typeof cvEditing !== 'undefined' && !cvEditing) renderCv();
+  // --- تحديث كافة القوائم لتظهر باللغة الجديدة ---
+  if(typeof cvEditing !== 'undefined' && !cvEditing && typeof renderCv === 'function') renderCv();
   if(typeof renderNews_list === 'function') renderNews_list();
   if(typeof renderPubs === 'function') renderPubs();
   if(typeof renderAch_list === 'function') renderAch_list();
