@@ -307,9 +307,12 @@
   <div id="pubList" class="card-list"><div class="loading" data-ar="جارٍ تحميل الأبحاث..." data-en="Loading publications...">جارٍ تحميل الأبحاث...</div></div>
   <div class="add-box owner-only hidden">
     <h4 data-ar="إضافة بحث منشور" data-en="Add Publication">إضافة بحث منشور</h4>
-    <input id="pubTitle" data-ph-ar="عنوان البحث" data-ph-en="Paper title" placeholder="عنوان البحث">
+        <input id="pubTitle" data-ph-ar="عنوان البحث" data-ph-en="Paper title" placeholder="عنوان البحث">
     <div class="grid-2">
-      <input id="pubJournal" data-ph-ar="اسم المجلة / المؤتمر" data-ph-en="Journal / Conference" placeholder="اسم المجلة / المؤتمر">
+      <!-- حقل لاسم المجلة باللغة العربية -->
+      <input id="pubJournalAr" data-ph-ar="اسم المجلة / المؤتمر (عربي)" data-ph-en="Journal / Conference (Arabic)" placeholder="اسم المجلة / المؤتمر (عربي)">
+      <!-- حقل جديد لاسم المجلة باللغة الإنجليزية -->
+      <input id="pubJournalEn" data-ph-ar="اسم المجلة / المؤتمر (إنجليزي)" data-ph-en="Journal / Conference (English)" placeholder="اسم المجلة / المؤتمر (إنجليزي)">
       <input id="pubYear" data-ph-ar="سنة النشر" data-ph-en="Year" placeholder="سنة النشر">
     </div>
     <input id="pubLink" data-ph-ar="رابط البحث (اختياري)" data-ph-en="Link (optional)" placeholder="رابط البحث (اختياري)">
