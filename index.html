@@ -143,6 +143,60 @@
     .contact-wrap{grid-template-columns:1fr; padding:34px 22px;}
     .grid-2{grid-template-columns:1fr;}
   }
+/* تنسيق الأزرار الجديدة بجانب الاسم */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto; /* يدفع الأزرار لليسار */
+  margin-right: 20px; /* مسافة عن القائمة */
+}
+
+#langToggle, .owner-only-btn, #logoutBtn {
+  cursor: pointer;
+  border: 1px solid var(--gold);
+  background: var(--gold);
+  color: var(--ink);
+  padding: 5px 12px;
+  border-radius: 2px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* تصغير خط القائمة الطويلة لتناسب شاشة اللابتوب */
+#navList {
+  display: flex;
+  list-style: none;
+  gap: 12px;
+}
+
+#navList a {
+  font-size: 0.82rem;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* إخفاء زر القائمة (☰) في الشاشات الكبيرة (اللابتوب) */
+@media (min-width: 1024px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+/* في الشاشات الصغيرة (الموبايل) */
+@media (max-width: 1023px) {
+  #navList {
+    display: none; /* يختفي ويظهر عبر الموبايل منيو */
+  }
+  #navList.mobile-open {
+    display: flex;
+    flex-direction: column;
+    /* أضف باقي تنسيقات الموبايل منيو الخاصة بك هنا */
+  }
+}
+
 </style>
 </head>
 <body>
