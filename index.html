@@ -458,16 +458,24 @@ function applyLang(){
     if(val !== null) el.setAttribute('placeholder', val);
   });
 
-  if(!cvEditing) renderCv();
-  renderNews_list();
-  renderPubs();
-  renderAch_list();
-  renderCourses_list();
-  renderTheses_list();
-  renderEducation_list();
-  renderLinks_list();
-  renderGallery_list();
+  // --- إضافة تبديل الإنفوجرافيك تلقائياً ---
+  const cvImg = document.getElementById('cv-img');
+  if(cvImg) {
+    cvImg.src = isEn ? cvImg.getAttribute('data-en-src') : cvImg.getAttribute('data-ar-src');
+  }
+
+  // --- تحديث كافة القوائم (الأبحاث، الأخبار، إلخ) ---
+  if(typeof cvEditing !== 'undefined' && !cvEditing) renderCv();
+  if(typeof renderNews_list === 'function') renderNews_list();
+  if(typeof renderPubs === 'function') renderPubs();
+  if(typeof renderAch_list === 'function') renderAch_list();
+  if(typeof renderCourses_list === 'function') renderCourses_list();
+  if(typeof renderTheses_list === 'function') renderTheses_list();
+  if(typeof renderEducation_list === 'function') renderEducation_list();
+  if(typeof renderLinks_list === 'function') renderLinks_list();
+  if(typeof renderGallery_list === 'function') renderGallery_list();
 }
+
 
 /* ============ AUTH ============ */
 function openLoginModal(){ document.getElementById('loginModal').classList.remove('hidden'); }
