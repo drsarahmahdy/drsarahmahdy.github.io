@@ -150,7 +150,13 @@
 <header>
   <nav>
     <div class="brand" data-ar="د. سارة <span>مهدي</span>" data-en="Dr. Sarah <span>Mahdy</span>">د. سارة <span>مهدي</span></div>
-    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    
+    <!-- نقل الزر إلى هنا ليكون مستقلاً ودائماً ظاهر -->
+    <div class="nav-controls">
+      <button id="langToggle" onclick="toggleLang()">English</button>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    </div>
+
     <ul id="navList">
       <li><a href="#about" data-ar="نبذة" data-en="About">نبذة</a></li>
       <li><a href="#cv" data-ar="الاهتمامات البحثية" data-en="Research Interests">الاهتمامات البحثية</a></li>
@@ -165,10 +171,11 @@
       <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
       <li><button id="loginBtn" onclick="openLoginModal()" data-ar="تسجيل الدخول" data-en="Log In">تسجيل الدخول</button></li>
       <li><button id="logoutBtn" onclick="doLogout()" class="hidden" data-ar="تسجيل الخروج" data-en="Log Out">تسجيل الخروج</button></li>
-      <li><button id="langToggle" onclick="toggleLang()">English</button></li>
+      <!-- قم بحذف السطر القديم للـ langToggle من هنا -->
     </ul>
   </nav>
 </header>
+
 
 <!-- LOGIN MODAL -->
 <div id="loginModal" class="modal-overlay hidden">
