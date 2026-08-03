@@ -818,8 +818,7 @@ function renderGalleryItem(g){
   </div>`;
 }
 async function loadGallery(){
-  const {data, error} = await sb.from('gallery').select('*').order('created_at',{ascending:false});
-  window._galleryData = (!error && data) ? data : [];
+const {data, error} = await sb.from('gallery').select('*').order('display_order', { ascending: true });  window._galleryData = (!error && data) ? data : [];
   renderGallery_list();
 }
 function renderGallery_list(){
